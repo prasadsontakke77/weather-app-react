@@ -41,6 +41,7 @@ function InputPage({ weatherData }) {
             toast.success("City is correct", toastOptions)
         }
     }
+
     return (
         <div className='container'>
             <ToastContainer toastStyle={{ backgroundColor: "black", color: "white" }} />
@@ -66,5 +67,4 @@ function InputPage({ weatherData }) {
         </div>
     )
 }
-
 export default InputPage
