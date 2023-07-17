@@ -9,9 +9,12 @@ import rain from "../images/rain.png"
 import mist from "../images/mist.png"
 import drizzle from "../images/drizzle.png"
 import clear from "../images/clear.png"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DataPage() {
     const { location } = useParams();
+    // const apiKey = process.env.REACT_APP_API_KEY
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=1799d3fc86e5898ee66b7da3aef7c863`
     const [weatherData, setWeatherData] = useState({
         celcias: 10,
@@ -25,10 +28,15 @@ function DataPage() {
     });
 
     useEffect(() => {
+        getLocation()
+    }, [])
+
+    const getLocation = async () => {
 
         axios.get(apiUrl)
             .then((res) => {
                 console.log(res.data)
+
                 let imagePath = ""
                 if (res.data.weather[0].main === "Clouds") {
                     imagePath = cloud
@@ -56,15 +64,33 @@ function DataPage() {
                     country: res.data.sys.country
                 })
 
+                if (location === res.data.name) {
+                    toast.success(`${location} is correct`, toastOptions)
+                    return true
+                }
+                else if (weatherData !== res.data.name) {
+                    toast.success(`${location} is  Correct`, toastOptions)
+                    return false
+                }
 
 
             })
             .catch((err) => {
                 console.log(err);
             })
-    }, [location])
+    }
+
+
+
+    const toastOptions = {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 8000,
+        pauseOnHover: true,
+        theme: 'green'
+    };
     return (
         <div className='container-data'>
+            <ToastContainer toastStyle={{ backgroundColor: "black", color: "white" }} />
             <div className='icon-part'>
                 <Link to={'/'} className='back-icon'>
                     <BiArrowBack />

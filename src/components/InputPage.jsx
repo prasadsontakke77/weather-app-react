@@ -4,16 +4,18 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function InputPage({ weatherData }) {
+function InputPage() {
+
     const [location, setLocation] = useState("")
     const [userLocation, setUserLocation] = useState("")
+    const apiUrl = "https://ipapi.co/json"
     const navigate = useNavigate()
     const handleLocationChange = (e) => {
         setLocation(e.target.value);
     };
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (location.length === 0) {
+        if (location === "" && !location) {
             toast.error("Enter Valid City name", toastOptions)
             return false
         }
@@ -33,7 +35,7 @@ function InputPage({ weatherData }) {
         getLocation()
     }, [])
     const getLocation = async () => {
-        const location = await axios.get("https://ipapi.co/json")
+        const location = await axios.get(apiUrl)
         setUserLocation(location.data.city)
         console.log(location.data.city);
         if (userLocation) {
