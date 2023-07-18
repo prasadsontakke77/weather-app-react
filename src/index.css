@@ -50,6 +50,14 @@ body {
 }
 .line {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  height: 1px;
+  margin-bottom: 10px;
+}
+.line > p {
+  margin: 0 7px;
 }
 /* weather city ends */
 /* container data starts */

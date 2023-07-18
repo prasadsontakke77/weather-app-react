@@ -41,6 +41,7 @@ function InputPage() {
         if (userLocation) {
             navigate(`/${userLocation}`)
             toast.success("City is correct", toastOptions)
+            return true
         }
     }
 
@@ -59,9 +60,9 @@ function InputPage() {
 
             </form>
             <div className='line'>
-                <hr style={{ width: '40%' }} />
-                or
-                <hr style={{ width: '40%' }} />
+                <hr style={{ width: '44%' }} />
+                <p>or</p>
+                <hr style={{ width: '44%' }} />
             </div>
             { }
             <button onClick={getLocation} >Get Device Location</button>
