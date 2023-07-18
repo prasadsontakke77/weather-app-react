@@ -15,7 +15,7 @@ function InputPage() {
     };
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (location === "" && !location) {
+        if (location === "") {
             toast.error("Enter Valid City name", toastOptions)
             return false
         }
